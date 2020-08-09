@@ -1,35 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>BATHDAL</title>
-    <link rel="stylesheet" href="myPageStyle.css">
+    <title>BATHDAL :: A Special Day</title>
+    <th:block th:insert="/fragments/header1"></th:block> <!-- 헤더 -->
+    <link rel="stylesheet" href="../../static/css/myPageStyle.css">
 </head>
 <body>
-    <nav>
-        <a href = "..\home.html"><img src="..\image\BATHDAL_LOGO_2.png" class="logo"></img></a>
-        <div class = "shoppingmall">SHOPPING MALL</div>
-        <ul>
-            <li><a href="..\myPage\myPage.html">MY PAGE</a></li>
-            <li><a href="login.html">LOGIN</a></li>
-        </ul>
-        <img src = "..\image\Fade_Border.png" class = "banner_border">
-    </nav>
-    <h1>My Page</h1>
+    <h1 id="myPage_banner">My Page</h1>
     <div class="info">
         <div class="customerInfo">
-            <h2>Customer Information</h2>
-            <div id="customerName">Name</div>
-            <div id="customerEmail">E-mail</div>
-            <div id="customerTel">Phone</div>
-            <div id="editInfo"><a href="userModifi.html">Edit Your Info></a></div>
+            <h2 id="customerInfo_banner">Customer Information</h2>
+            <div id="customerName" th:text="${member.getMemberName()}">Name</div>
+            <div id="customerTel" th:text="${member.getMemberPhoneNum()}">Phone</div>
+            <div id="customerEmail" th:text="${member.getMemberEmail()}">E-mail</div>
+            <div id="customerGender" th:text="${member.getMemberGender()}">Gender</div>
+            <div id="editInfo"><a href="/myPage/userModifi">Edit Your Info></a></div>
         </div>
 
         <div class="orderInfo">
-            <a href="orderList.html" id="orderList">Order List</a>
-            <a href="subscribeList.html" id="subscribeList">Subscription</a>
-            <a href="myReview.html" id="myReview">Review</a>
-            <a href="cart.html" id="cart">Cart</a>
+            <a href="/myPage/myOrderList" id="orderList">Order List</a>
+            <a href="/myPage/mySubscribeList" id="subscribeList">Subscription</a>
+            <a href="/myPage/myReview" id="myReview">Review</a>
+            <a href="/myPage/myCart" id="cart">Cart</a>
         </div>
         <div id="subscription">
             Subscripted.

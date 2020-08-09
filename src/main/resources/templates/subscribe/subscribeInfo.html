@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>BATHDAL :: A Special Day</title>
+    <th:block th:insert="/fragments/header1"></th:block> <!-- 헤더 -->
+    <link rel="stylesheet" href="header.css">
+    <style>
+    .progress{
+    margin:50px;
+    text-align:center;
+     }
+
+    .progress div{
+    display:inline;
+    padding:5px;
+    margin:40px;
+    }
+
+    .progress img{
+    width:150px;
+    height:150px;
+    }
+
+    .payform{
+    border:5px solid pink;
+    width:500px;
+    height:1050px;
+    padding:10px;
+    top:50%;
+    left:50%;
+    margin:auto;
+     }
+
+    .payform div{
+    padding:3px;
+    margin:5px;
+    }
+
+    #specificsIn{
+    width:400px;
+    height:200px;
+    }
+
+    #num1{
+    width:100px;
+    }
+    #num2{
+    width:100px;
+    }
+    #num3{
+    width:100px;
+    }
+    #num4{
+    width:100px;
+    }
+
+    #date1{
+    width:208px;
+    }
+    #date2{
+    width:208px;
+    }
+
+    #deliveryabout{
+    border:5px solid #F65A79;
+    text-align:center;
+    padding:5px;
+    margin:30px;
+    width:250px;
+    top:50%;
+    left:50%;
+    margin:auto;
+    }
+
+    button{
+    border : 3px solid  #f26d7d;
+    background-color : #f26d7d;
+    padding : 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 2px 2px;
+    cursor: pointer;
+    font-family: 'Bahnschrift';
+    border-radius: 4px;
+    transition-duration: 0.2s;
+    position : relative;
+    top : 3px;
+    color : white;
+    }
+
+    button::after{
+    background: none repeat scroll 0 0 transparent;
+    bottom: 7px;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #fff;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+    }
+
+    button:hover::after{
+    width: 60%;
+    left: 21%;
+    }
+    </style>
+</head>
+<body>
+
+
+<div class="progress">
+    <div id="type"><img src="/image/type.png"></img></div>
+    <div id="result"><img src="/image/result.png"></img></div>
+    <div id="payment"><img src="/image/paymentSelect.png"></img></div>
+</div>
+
+<h2 style="text-align:center">Please fill in the delivery information.</h2>
+
+<div class="payform">
+    <div class="name">NAME *</div>
+    <input type="text">
+    <div class="phonenum">Phone number *</div>
+    <input type="text" placeholder="please enter without '-'">
+    <div class="Postcode">Post code</div>
+    <input type="text" id="postcode" size="10" readonly="readonly" placeholder="Post code"> <input type="button" onclick="openDaumPostcode()" value="SEARCH">
+    <div class="addr">Address *</div>
+    <input type="text" id="address" readonly="readonly" size="30" placeholder="Street name address"> <input type="text" id="extraAddress" readonly="readonly" size="20" placeholder="Extra adress">
+    <div class="detailaddr">Detailed address *</div>
+    <input type="text" id="detailAddress" size="56" placeholder="Detailed address">
+    <div class="specifics">Delivery specifics</div>
+    <input type="text" id="specificsIn" placeholder="Please write unusual details when shipping.">
+    <div class="cardnum">Card number [XXXX-XXXX-XXXX-XXXX]</div>
+    <input type="text" id="num1" placeholder="XXXX"><input type="text" id="num2" placeholder="XXXX"><input type="text" id="num3" placeholder="XXXX"><input type="text" id="num4" placeholder="XXXX">
+    <div class="cardexpdate">Card expiration date</div>
+    <input type="text" id="date1" placeholder="MM"><input type="text" id="date2" placeholder="YY">
+    <div class="cardcode">Security Code</div>
+    <input type="password" size="1">
+    <div class="cardpw">First two digits of the card password</div>
+    <input type="password" placeholder="**">
+    <br><br>
+    <div id="deliveryabout">
+        <h2>BATHDAL</h2>
+        <h4>The first delivery date is the ___ of the month.</h4>
+        <h3 style="color:#F65A79;">Payment amount : ____won</h3>
+        <div id="next">
+            <button type = "button" onclick="location.href='/subscribe/subscribeComplete'">
+                PAY
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    //주소 api
+    function openDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+
+                var addr = '';
+                var extraAddr = '';
+                if (data.userSelectedType === 'R') {
+                    addr = data.roadAddress;
+                } else {
+                    addr = data.jibunAddress;
+                }
+
+                if(data.userSelectedType === 'R'){
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드로
+                    document.getElementById("extraAddress").value = extraAddr;
+                } else {
+                    document.getElementById("extraAddress").value = '';
+                }
+                // 우편번호와 주소 정보를 해당 필드
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("address").value = addr;
+                // 커서를 상세주소로
+                document.getElementById("detailAddress").focus();
+            }
+        }).open();
+    }
+</script> <!-- 주소 API -->
+</body>
+</html>

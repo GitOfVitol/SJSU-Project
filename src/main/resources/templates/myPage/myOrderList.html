@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BATHDAL :: A Special Day</title>
+    <th:block th:insert="/fragments/header1"></th:block> <!-- 헤더 -->
+
+    <link rel="stylesheet" href="../../static/css/myPageStyle.css">
+    <style>
+        .info .orderInfo #orderList {
+            text-decoration-line: underline;
+            text-underline-color: #f26d7d;
+            color: #f26d7d;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="myPage_banner">My Page</h1>
+    <div class="info">
+        <div class="customerInfo">
+            <h2 id="customerInfo_banner">Customer Information</h2>
+            <div id="customerName" th:text="${member.getMemberName()}">Name</div>
+            <div id="customerTel" th:text="${member.getMemberPhoneNum()}">Phone</div>
+            <div id="customerEmail" th:text="${member.getMemberEmail()}">E-mail</div>
+            <div id="customerGender" th:text="${member.getMemberGender()}">Gender</div>
+            <div id="editInfo"><a href="/myPage/userModifi">Edit Your Info></a></div>
+        </div>
+
+        <div class="orderInfo">
+            <a href="/myPage/myOrderList" id="orderList">Order List</a>
+            <a href="/myPage/mySubscribeList" id="subscribeList">Subscription</a>
+            <a href="/myPage/myReview" id="myReview">Review</a>
+            <a href="/myPage/myCart" id="cart">Cart</a>
+        </div>
+        <div id="subscription">
+            Subscripted.
+        </div>
+    </div>
+
+    <div class="dateBtn">
+        <button type="button">Today</button>
+        <button type="button">1 week</button>
+        <button type="button">1 month</button>
+        <button type="button">3 months</button>
+        <button type="button">6 months</button>
+    </div>
+    <div class="orderDetails">
+        <span>Order Date</span>
+        <span>Image</span>
+        <span>Item</span>
+        <span>QTY</span>
+        <span>Price</span>
+        <span>Order State</span>
+    </div>
+    <div style="text-align: center; margin-top: 50px">
+        주문정보
+    </div>
+</body>
+</html>

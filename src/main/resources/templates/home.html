@@ -1,67 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
+    <title>BATHDAL :: A Special Day</title>
+    <th:block th:if="${sessionChk == 0}">
+    <th:block th:insert="/fragments/header"></th:block> <!-- 헤더 -->
+    </th:block>
+    <th:block th:unless="${sessionChk == 0}">
+    <th:block th:insert="/fragments/header1"></th:block>
+    </th:block>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <style>
         body{
             margin : 0;
             padding :0;
-            background: white;            
+            background: white;
             font-family : 'Bahnschrift';
-            overflow-x: hidden;
+            overflow-x: hidden  ;
         }
-        nav a img.logo{
-            position: fixed;
-            top: 20px;
-            left : 40px;
-            box-sizing : border-box;
-        }
-
-        nav div.shoppingmall{
-            display : block;
-            color : grey;
-            text-decoration: none;
-            font-size : 17px;
-            font-weight: bold;
-            position : absolute;
-            top : 40px;
-            left : 240px;
-        }
-
-        nav{
-            width : 100%;
-            height: 70px;
-            position: fixed;
-            top: 0px;
-            background : white;
-            border-bottom: 1px solid pink;
-            z-index : 8;
-        }
-        nav ul{
-            display : flex;
-            margin :0;
-            padding : 40px 100px;
-            float :right;
-        }
-        nav ul li{
-            list-style : none;
-        }
-        nav ul li a{
-            display : block;
-            color :grey;
-            padding : 0 20px;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size : 12px;
+        body{
+            margin : 0;
+            padding :0;
+            background: white;
+            font-family : 'Bahnschrift';
+            overflow-x: hidden  ;
         }
         img.banner_border{
             position : absolute;
             top : 70px;
         }
-
         div.sec1{
             height: 671px;
             margin-top: 0;
@@ -96,7 +65,21 @@
             text-transform: uppercase;
             white-space: nowrap;
         }
-    
+        div.circle {
+            background-color:wheat;
+            width:600px;
+            height:600px;
+            border-radius:380px;
+            text-align:center;
+            margin:0 auto;
+            font-size:12px;
+            vertical-align:middle;
+            line-height:150px;
+            position: relative;
+            top : 300px;
+            left : 400px;
+        }
+        
         div.banner_text{
             position: absolute;
             top: 43%;
@@ -120,25 +103,62 @@
             z-index: 2;
         }
 
-        div.sec2{        
+
+        div.description{
+            position :relative;
+            top : 110px;
+        }
+        div.sec2_text{        
             text-align : justify;
             position: absolute;
-            top : 800px;
             left : 700px;
             font-size: 20px;
             margin-right: 200px;
             color: grey;
         }
+        img.sec2_png{
+            position : absolute;
+            top : -40px;
+            left : 220px;
+        }
 
-        div.sec3{
+        
+        div.sec3_text{
             text-align : justify;
             position: absolute;
-            top : 1100px;
+            top : 400px;    
             right: 700px;
             font-size: 20px;
             margin-left: 200px;
             color: grey;
         }
+        img.sec3_png{
+            position: absolute;
+            top : 350px;
+            left : 850px;
+        }
+
+
+        div.sec4{
+            position: relative;
+            top : 820px;
+            width : auto;
+            height :540px;
+            background-color : #f26d7d;
+        }
+        div.sec4_png{
+            position : relative;
+            left : 500px;
+        }
+        div.sec4_text{
+            position : relative;
+            text-align: center;
+            color : white;
+            font-size : 40px;
+            top : 30px;
+        }
+
+
 
         button{
             border : 3px solid  #f26d7d;
@@ -154,7 +174,7 @@
             border-radius: 4px;
             transition-duration: 0.2s;
             position : relative;
-            top : 270px;
+            top : 285px;    
             left : 80px;
             color : white;
         }
@@ -177,7 +197,7 @@
 
         div.button_container{
             position : relative;
-            top : 700px;  
+            top : 900px;  
             left : 40%; 
         }
 
@@ -201,26 +221,39 @@
             left : 200px;
         }
 
-        div.sec4_text{
+        div.sec5_text{
             position :relative;
             top : 30px;
             text-align: center;
             color : white;
         }
+        
+
+        div.sec6{
+            height : 550px;
+        }
+        hr{
+            position: relative;
+            top : 600px;
+        }
+        h2.sec6_title{
+            color :#f26d7d;
+            font-size:40px;
+            position: relative;
+            top: 700px;
+            text-align: center;
+        }
+
+
+
+        footer{
+            position: relative;
+            top : 800px;
+        }
 
     </style>
 </head>
-    <body>
-        <nav>
-            <a href = "home.html"><img src=".\image\BATHDAL_LOGO_2.png" class="logo"></img></a>
-            <div class = "shoppingmall">SHOPPING MALL</div>
-            <ul>
-                <li><a href=".\myPage\myPage.html">MY PAGE</a></li>
-                <li><a href="login.html">LOGIN</a></li>
-            </ul>
-            <img src = ".\image\Fade_Border.png" class = "banner_border">
-        </nav>
-
+<body>
         <div class = "sec1">
             <div class = "sec1_text">
                 <h4 class = "banner" style = "text-decoration: underline;">BATH SUBSCRIPTION SERVICE</h4>
@@ -228,45 +261,61 @@
             </div>
             <div class = "video_container">
                 <video class = "banner_background_video" width = "125.7%" height = "auto" loop data-video="0" autoplay = "autoplay" muted = "muted">
-                    <source src = ".\image\banner_video.mp4" type = "video/mp4">
+                    <source src = "/image/banner_video.mp4" type = "video/mp4">
                 </video>
             </div>
             <div class = "banner_text">
                 To Bring<br> a <span id ="stress">Friendly</span> & <span id ="stress">Luxurious</span> Experience<br> To Your <span id ="stress">Bathroom</span> !
             </div>    
+            <div class = "circle">
+            </div>
             
         </div>
 
-        <div class = "sec2">
-            <div>
-                <h2>BATH BOMB</h2>
-                <div>
-                    Settle in for a good soak with a bathbomb, exploding with essential oils and tons of fizzy fun. Whether you're after a relaxing, petal-laden floral soak or an invigorating multilayered explosion of color and scent, there's a bath bomb perfect for every bathing experience.
+        <div class = "description">
+            <div class = "sec2">
+                <div class = "block" data-aos="fade-up">
+                    <img class = "sec2_png" src ="/image/bathbomb.png" width = "27%"></img>
+                </div>
+                <div class = "sec2_text">
+                    <h2 style= "color: black;">BATH BOMB</h2>
+                    <div>
+                        Settle in for a good soak with a bathbomb, exploding with essential oils and tons of fizzy fun. Whether you're after a relaxing, petal-laden floral soak or an invigorating multilayered explosion of color and scent, there's a bath bomb perfect for every bathing experience.
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class = "sec3">
-           <div>
-                <h2 style = "text-align: right;">NATURAL SOAP</h2>
-                <div>
-                    Settle in for a good soak with a bathbomb, exploding with essential oils and tons of fizzy fun. Whether you're after a relaxing, petal-laden floral soak or an invigorating multilayered explosion of color and scent, there's a bath bomb perfect for every bathing experience.
+            <div class = "sec3">
+                <div class = "block" data-aos="fade-up">
+                    <img class = "sec3_png" src ="/image/natural_soap_3.png" width = "32%">
+                </div>
+                <div class = "sec3_text">
+                    <h2 style = "text-align: right; color: black;">NATURAL SOAP</h2>
+                    <div>
+                        Settle in for a good soak with a bathbomb, exploding with essential oils and tons of fizzy fun. Whether you're after a relaxing, petal-laden floral soak or an invigorating multilayered explosion of color and scent, there's a bath bomb perfect for every bathing experience.
+                    </div>
                 </div>
             </div>
-            
         </div>
         
         <div class = "sec4">
+            <div class = "sec4_text" data-aos="fade-up">
+                WHAT'S FOR THIS MONTH?
+            </div>
+            <img class = "sec4_png" src = "/image/question_box.png">
+        </div>
+
+        <div class = "sec5">
             <div class = "button_container">
                 <div class = "subscribe">  
                     <div class = "subscribe_container">
-                        <div class = "sec4_text">
+                        <div class = "sec5_text">
                             <h2 style = "color: black;">NOT SUBSCRIBED YET?</h2>
                             <p>
     
                             </p>
                         </div>  
-                        <button type = "button" class= "subscribe">
+                        <button type = "button" class= "subscribe" onclick="return goSubscribe();">
                             SUBSCRIBE
                         </button>
                     </div>            
@@ -274,7 +323,7 @@
 
                 <div class = "purchase">    
                     <div class = "purchase_container">
-                        <div class = "sec4_text">
+                        <div class = "sec5_text">
                             <h2 style = "color: black;">ONLY WANT TO BUY ONE TIME?</h2>
                             <p>
 
@@ -287,5 +336,48 @@
                 </div>
             </div>
         </div>
+
+        <div class = "sec6">
+            <hr width = "500px" height = "30px">
+            <h2 class = "sec6_title">REVIEW</h2>
+        </div>
+
+        <footer>
+            <img src="/image/footer.png" width = "100%" height = "70%">
+        </footer>
+
+        <!--Start of Tawk.to Script-->
+        <script type="text/javascript">
+            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+            (function(){
+                var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+                s1.async=true;
+                s1.src='https://embed.tawk.to/5f1d696c4eb6fc4a189ae4e7/default';
+                s1.charset='UTF-8';
+                s1.setAttribute('crossorigin','*');
+                s0.parentNode.insertBefore(s1,s0);
+            })();
+
+        </script>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration:1500
+            });
+        </script>
+        <!--End of Tawk.to Script-->
+
+        <script th:inline="javascript">
+            //구독구매창 눌렀을때 로그인 안하면 못가게
+            var session = [[${sessionChk}]];
+            function goSubscribe(){
+                if(session = 0){
+                    alert("Please login first");
+                    return false;
+                }else{
+                    location.href="/subscribe/subscribe";
+                }
+            }
+        </script>
     </body>
 </html>
